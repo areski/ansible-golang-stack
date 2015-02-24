@@ -14,27 +14,28 @@ missing...
 Deploy using Docker Only
 ------------------------
 
-1) Create a Dockerfile with your distro and SSHD.
+1) Create a Dockerfile to run Debian 7.x with SSHD.
 
-    You can use this Dockerfile: https://github.com/areski/dockerfiles/tree/master/sshd
+    docker pull tutum/debian
 
 2) Build and run the docker container:
 
-    docker build -t eg_sshd .
-    docker run -d -P --name test_sshd eg_sshd
+    docker run -d -p 2222:22 -e AUTHORIZED_KEYS="$(cat ~/.ssh/id_rsa.pub)" tutum/debian:wheezy
 
 3) Find out on which IP / Port the container is running:
 
-    docker port test_sshd 22
+    docker ps
+    docker port <docker_name> 22
 
-4) create file `hosts`:
+4) Find the root password of the container:
+
+    docker logs <container_id>
+
+5) Create file `hosts`:
 
     [docker1]
-    127.0.0.1         ansible_ssh_port=49153     ansible_ssh_user=root
+    127.0.0.1         ansible_ssh_port=2222     ansible_ssh_user=root
 
-5) run the playbook:
+6) Run the playbook:
 
     ansible-playbook -vvvv ansible.yml -i hosts --ask-pass
-
-    # password by default is `screencast`
-

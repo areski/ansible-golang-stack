@@ -104,7 +104,5 @@ ansible-playbook -i vagrant_ansible_inventory_default --private-key=~/.vagrant.d
 ## TODO
 
 - [ ] Add role to deploy Riak for development: https://github.com/basho/ansible-riak
-
 - [ ] env_vars/base.yaml needs to be changed
-
 - [ ] db book could create default schema or we could ask the app to do so
