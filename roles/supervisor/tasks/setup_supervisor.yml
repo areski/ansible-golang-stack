@@ -1,0 +1,13 @@
+---
+
+- name: Install Supervisor
+  apt: name=supervisor update_cache={{ update_apt_cache }} state=installed
+
+- name: Ensure supervisor service is started
+  service: name=supervisor state=started enabled=yes
+
+- name: Re-read the Supervisor config files
+  command: supervisorctl reread
+
+- name: Update Supervisor to add the app in the process group
+  command: supervisorctl update

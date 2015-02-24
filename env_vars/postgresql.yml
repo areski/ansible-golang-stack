@@ -1,0 +1,31 @@
+---
+
+# Basic settings
+postgresql_version: 9.3
+postgresql_encoding: 'UTF-8'
+postgresql_locale: 'en_US.UTF-8'
+
+postgresql_admin_user: "postgres"
+postgresql_default_auth_method: "trust"
+
+postgresql_cluster_name: "main"
+postgresql_cluster_reset: false
+
+# # List of databases to be created (optional)
+# postgresql_databases:
+#   - name: foobar
+#     hstore: yes         # flag to install the hstore extension on this database (yes/no)
+#     uuid_ossp: yes      # flag to install the uuid-ossp extension on this database (yes/no)
+
+# List of users to be created (optional)
+postgresql_users:
+  - name: "{{ db_user }}"
+    pass: password
+    encrypted: no       # denotes if the password is already encrypted.
+
+# List of user privileges to be applied (optional)
+postgresql_user_privileges:
+  - name: "{{ db_name }}"         # user name
+    db: foobar                  # database
+    priv: "ALL"                 # privilege string format: example: INSERT,UPDATE/table:SELECT/anothertable:ALL
+    role_attr_flags: "CREATEDB" # role attribute flags

@@ -1,0 +1,9 @@
+---
+
+- include: create_users_and_groups.yml
+
+- include: setup_git_repo.yml
+
+- include: setup_golang_app.yml
+
+- include: setup_supervisor.yml

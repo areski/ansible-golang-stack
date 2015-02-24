@@ -1,0 +1,7 @@
+---
+# tasks file for htop
+# - name: ensure htop is at the latest version
+#   apt: pkg=htop state=latest
+
+- name: ensure htop is not installed
+  apt: pkg=htop state=absent

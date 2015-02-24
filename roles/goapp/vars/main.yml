@@ -1,0 +1,22 @@
+---
+
+# Application settings.
+root_application_path: "/opt/app"
+
+# User settings
+goapp_user: "{{ application_name }}"
+goapp_group: webapps
+
+goapp_name: "{{ application_name }}"
+goapp_path: "{{ root_application_path }}/{{ goapp_name }}"
+
+# go_supervisor_template_file: "supervisor_{{ goapp_name }}.conf.j2"
+
+goapp_command: "{{ application_name }}"
+goapp_bin_path: "{{ goapp_path }}/bin"
+goapp_logdir: "/var/log/{{ goapp_name }}/"
+goapp_logfile: "{{ goapp_logdir }}/{{ goapp_name }}.log"
+
+# Environment variables
+goapp_environment:
+  GOPATH: "{{ goapp_path }}"

@@ -1,0 +1,4 @@
+---
+
+- name: restart {{ goapp_command }}
+  supervisorctl: name={{ goapp_command }} state=restarted

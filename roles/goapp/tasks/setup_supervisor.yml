@@ -1,0 +1,29 @@
+---
+
+- name: Create the Supervisor config file for {{ goapp_name }}
+  template: src=supervisor_golang_app.conf.j2
+            dest=/etc/supervisor/conf.d/{{ goapp_name }}.conf
+
+- name: Create the {{ goapp_name }} app log folder
+  file: path={{ goapp_logdir }}
+        owner={{ goapp_user }}
+        group={{ goapp_group }}
+        mode=0774
+        state=directory
+  tags:
+    - logs
+
+- name: Create the {{ goapp_name }} log file
+  file: path={{ goapp_logfile }}
+        owner={{ goapp_user }}
+        group={{ goapp_group }}
+        mode=0774
+        state=touch
+  tags:
+    - logs
+
+- name: Re-read the Supervisor config files
+  command: supervisorctl reread
+
+- name: Update Supervisor to add the app in the process group
+  command: supervisorctl update

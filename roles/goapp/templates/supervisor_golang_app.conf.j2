@@ -1,0 +1,15 @@
+[program:{{ goapp_name }}]
+command={{ goapp_bin_path }}/{{ goapp_command }}
+
+autostart=true
+autorestart=true
+startretries=10
+startsecs=5
+directory={{ goapp_bin_path }}
+
+
+user={{ goapp_user }}
+redirect_stderr=true
+stdout_logfile={{ goapp_logfile }}
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10

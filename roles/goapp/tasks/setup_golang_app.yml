@@ -1,0 +1,13 @@
+---
+
+- name: Build the Go application {{ goapp_path }}
+  command: chdir={{ goapp_path }} make build
+  environment: goapp_environment
+  tags:
+    - goapp
+
+- name: Create log directory for Go application {{ application_name }}
+  command: chdir={{ goapp_path }} make logdir
+  environment: goapp_environment
+  tags:
+    - goapp

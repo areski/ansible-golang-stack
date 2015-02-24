@@ -1,0 +1,15 @@
+---
+
+- name: Create the {{ goapp_path }} app folder
+  file: path={{ goapp_path }}
+        owner={{ goapp_user }}
+        group={{ goapp_group }}
+        mode=0774
+        state=directory
+  tags:
+    - app
+
+- name: Setup the Git repo
+  git: repo={{ git_repo }} dest={{ goapp_path }} accept_hostkey=yes
+  when: setup_git_repo
+  tags: git

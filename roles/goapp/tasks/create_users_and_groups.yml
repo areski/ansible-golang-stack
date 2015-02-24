@@ -1,0 +1,10 @@
+---
+
+- name: Create the application user
+  user: name={{ goapp_user }} state=present
+
+- name: Create the application group
+  group: name={{ goapp_group }} system=yes state=present
+
+- name: Add the application user to the application group
+  user: name={{ goapp_user }} group={{ goapp_group }} state=present
